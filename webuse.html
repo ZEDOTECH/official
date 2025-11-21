@@ -1,161 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3N0X9YRHN"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
-
-        gtag("config", "G-D3N0X9YRHN");
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-D3N0X9YRHN');
     </script>
-    <meta charset="utf-8" />
-    <title>Privacy Policy - ZEDOTECH</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta content="為個人和企業提供全方位的網路解決方案，包括網域註冊、雲端伺服器租用、網站開發、上線等服務，讓您可以一站完成。" name="description" />
-    <meta content="ZEDOTECH" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <!-- SEO Meta Tags -->
+    <title>網站使用條款 - ZEDOTECH</title>
+    <meta name="description" content="ZEDOTECH 網站使用條款 - 了解使用本網站的相關規範與條件。">
+    <meta name="author" content="ZEDOTECH">
 
-    <!--Material Icon -->
-    <link rel="stylesheet" type="text/css" href="css/materialdesignicons.min.css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
 
-    <!--Font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-    <!-- Custom  sCss -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <!-- Material Design Icons -->
+    <link rel="stylesheet" href="css/materialdesignicons.min.css">
+
+    <!-- Custom Modern CSS -->
+    <link rel="stylesheet" href="css/modern.css">
+
     <style>
-        h1,
-        h2 {
-            color: white;
-            font-family: 'Righteous', cursive;
-            color: #fddd43;
-            font-weight: bold;
+        .content-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px var(--spacing-md) var(--spacing-xl);
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .content-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-md));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .content-box h2 {
+            color: var(--accent-cyan);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .content-box h2:first-child {
+            margin-top: 0;
+        }
+
+        .content-box p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .content-box ul {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            padding-left: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .content-box li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .intro-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.8;
+        }
+
+        .update-date {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: var(--spacing-md);
         }
     </style>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="78">
-    <!--Navbar Start-->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky-dark" id="sticky">
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
         <div class="container-fluid">
-            <!-- LOGO -->
-            <a class="logo text-uppercase" href="index.html">
-                <img src="images/logo-light.png" alt="" class="logo-light" height="21" />
-                <img src="images/logo-dark.png" alt="" class="logo-dark" height="21" />
-            </a>
+            <a href="index_modern.html" class="logo">ZEDOTECH</a>
 
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+                <i class="mdi mdi-menu"></i>
+            </button>
 
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index_modern.html" class="nav-link"><i class="mdi mdi-home"></i> 返回首頁</a></li>
+                <li><a href="privacy.html" class="nav-link"><i class="mdi mdi-shield-check"></i> 隱私權政策</a></li>
+            </ul>
         </div>
     </nav>
-    <!-- Navbar End -->
 
-    <!-- home start -->
-    <section class="bg-home bg-gradient text-light" id="home">
-        <div class="home-center">
-            <div class="home-desc-center">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <h1 id="terms-of-use-for-zedotech" class="zt-title">ZEDOTECH - 網站使用條款</h1>
+    <!-- Content Section -->
+    <section class="content-section">
+        <h1 class="page-title animate-in">網站使用條款</h1>
 
-                            <p>歡迎使用 ZEDOTECH 網站。請仔細閱讀以下使用條款。使用本網站即表示您同意遵守這些條款。</p>
+        <p class="intro-text animate-in">
+            歡迎使用 ZEDOTECH 網站。<br>
+            請仔細閱讀以下使用條款。使用本網站即表示您同意遵守這些條款。
+        </p>
 
-                            <h2>1. 使用條件</h2>
-                            <p>使用本網站時，您同意：</p>
-                            <ul>
-                                <li>遵守所有適用的法律和法規</li>
-                                <li>不會從事任何可能損害網站運作的行為</li>
-                                <li>不會試圖未經授權訪問網站的任何部分</li>
-                                <li>不會使用網站進行任何非法或未經授權的目的</li>
-                            </ul>
+        <div class="content-box animate-in">
+            <h2>1. 使用條件</h2>
+            <p>使用本網站時，您同意：</p>
+            <ul>
+                <li>遵守所有適用的法律和法規</li>
+                <li>不會從事任何可能損害網站運作的行為</li>
+                <li>不會試圖未經授權訪問網站的任何部分</li>
+                <li>不會使用網站進行任何非法或未經授權的目的</li>
+            </ul>
 
-                            <h2>2. 智慧財產權</h2>
-                            <p>本網站的所有內容，包括但不限於文字、圖像、標誌、按鈕圖標、圖片、音頻剪輯、數字下載和軟件，均為 ZEDOTECH 或其內容提供商的財產，受版權法保護。</p>
+            <h2>2. 智慧財產權</h2>
+            <p>本網站的所有內容，包括但不限於文字、圖像、標誌、按鈕圖標、圖片、音頻剪輯、數字下載和軟件，均為 ZEDOTECH 或其內容提供商的財產，受版權法保護。</p>
 
-                            <h2>3. 服務變更</h2>
-                            <p>ZEDOTECH 保留隨時修改或終止服務的權利，恕不另行通知。我們不對服務的任何修改、暫停或終止負責。</p>
+            <h2>3. 服務變更</h2>
+            <p>ZEDOTECH 保留隨時修改或終止服務的權利，恕不另行通知。我們不對服務的任何修改、暫停或終止負責。</p>
 
-                            <h2>4. 用戶帳戶</h2>
-                            <p>如果您創建了帳戶，您有責任維護帳戶的安全性並對所有使用您帳戶的活動負全責。</p>
+            <h2>4. 用戶帳戶</h2>
+            <p>如果您創建了帳戶，您有責任維護帳戶的安全性並對所有使用您帳戶的活動負全責。</p>
 
-                            <h2>5. 免責聲明</h2>
-                            <p>本網站及其內容按"現狀"提供，不提供任何明示或暗示的保證。ZEDOTECH 不保證網站將無錯誤或不間斷運行。</p>
+            <h2>5. 免責聲明</h2>
+            <p>本網站及其內容按 "現狀" 提供，不提供任何明示或暗示的保證。ZEDOTECH 不保證網站將無錯誤或不間斷運行。</p>
 
-                            <h2>6. 責任限制</h2>
-                            <p>ZEDOTECH 不對任何直接、間接、附帶、特殊或衍生的損害負責，這些損害可能由於使用或無法使用本網站或其內容而產生。</p>
+            <h2>6. 責任限制</h2>
+            <p>ZEDOTECH 不對任何直接、間接、附帶、特殊或衍生的損害負責，這些損害可能由於使用或無法使用本網站或其內容而產生。</p>
 
-                            <h2>7. 適用法律</h2>
-                            <p>這些條款受中華民國法律管轄，並按其解釋。任何爭議應提交至台灣的適當法院解決。</p>
+            <h2>7. 適用法律</h2>
+            <p>這些條款受中華民國法律管轄，並按其解釋。任何爭議應提交至台灣的適當法院解決。</p>
 
-                            <h2>8. 修改</h2>
-                            <p>ZEDOTECH 保留隨時修改這些使用條款的權利。修改後的條款將在本頁面上發布。繼續使用網站即表示您接受修改後的條款。</p>
+            <h2>8. 修改</h2>
+            <p>ZEDOTECH 保留隨時修改這些使用條款的權利。修改後的條款將在本頁面上發布。繼續使用網站即表示您接受修改後的條款。</p>
 
-                            <h2>9. 聯繫我們</h2>
-                            <p>如果您對這些使用條款有任何問題，請通過 nicky@zedotech.com 與我們聯繫。</p>
+            <h2>9. 聯繫我們</h2>
+            <p>如果您對這些使用條款有任何問題，請通過 <a href="mailto:nicky@zedotech.com"
+                    style="color: var(--accent-cyan);">nicky@zedotech.com</a> 與我們聯繫。</p>
 
-                            <p>最後更新日期：2024年7月12日</p>
-                        </div>
-                    </div>
-                    <!-- end row -->
-                </div>
-                <!-- end container-fluid -->
-            </div>
+            <p class="update-date">最後更新日期：2024年7月12日</p>
         </div>
     </section>
-    <!-- home end -->
 
-    <!-- footer start -->
-    <footer class="bg-dark footer">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="float-start pull-none">
-                <p class="text-white-50">
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  &copy;ZEDOTECH <b>|</b> Contact me:
-                  <a class="text-white" href="mailto:nicky@zedotech.com"
-                    >nicky@zedotech.com</a
-                  > <b>|</b> <a href="webuse.html" class="text-white">使用條款</a> <b>|</b> <a href="privacy.html" class="text-white">隱私權政策</a>
-                </p>
-              </div>
-            </div>
-            <!-- end col -->
-          </div>
-          <!-- end row -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <span id="currentYear"></span> © ZEDOTECH |
+                Contact: <a href="mailto:nicky@zedotech.com">nicky@zedotech.com</a> |
+                <a href="webuse.html">使用條款</a> |
+                <a href="privacy.html">隱私權政策</a>
+            </p>
         </div>
-        <!-- container-fluid -->
-      </footer>
-    <!-- footer end -->
+    </footer>
 
-    <!-- Back to top -->
-    <!-- <a href="#" class="back-to-top" id="back-to-top"> <i class="mdi mdi-chevron-up"> </i> </a> -->
-    <!-- Back to top -->
-    <a href="#" onclick="topFunction()" class="back-to-top-btn btn btn-primary" id="back-to-top-btn"><i
-            class="mdi mdi-chevron-up"></i></a>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="mdi mdi-chevron-up"></i>
+    </button>
 
-    <div class="codebg"></div>
-    <!-- javascript -->
-
-    <script src="js/bootstrap.bundle.min.js"></script>
-
-    <!-- custom js -->
-    <script src="js/app.js"></script>
+    <!-- JavaScript -->
+    <script src="js/modern.js"></script>
 </body>
 
 </html>

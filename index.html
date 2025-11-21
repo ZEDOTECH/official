@@ -1,600 +1,311 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-D3N0X9YRHN"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+<html lang="zh-TW">
 
-      gtag("config", "G-D3N0X9YRHN");
-    </script>
-    <meta charset="utf-8" />
-    <title>ZEDOTECH</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      content="為個人和企業提供全方位的網路解決方案，包括網域註冊、雲端伺服器租用、網站開發、上線等服務，讓您可以一站完成。"
-      name="description"
-    />
-    <meta content="ZEDOTECH" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3N0X9YRHN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-D3N0X9YRHN');
+  </script>
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+  <!-- SEO Meta Tags -->
+  <title>ZEDOTECH - 創新 AI 應用與全端開發專家</title>
+  <meta name="description" content="超過15年開發經驗的專業工程師，提供 AI 應用開發、全端網站開發、雲端服務整合與客製化軟體開發。讓科技為您的業務賦能。">
+  <meta name="author" content="ZEDOTECH">
+  <meta name="keywords" content="AI應用開發, 全端開發, 網站開發, 雲端服務, ASP.NET Core, C#, Javascript">
 
-    <!--Material Icon -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="css/materialdesignicons.min.css"
-    />
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="images/favicon.ico">
 
-    <!--Font-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
-    <!-- Custom  sCss -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/custom.css" />
-  </head>
+  <!-- Material Design Icons -->
+  <link rel="stylesheet" href="css/materialdesignicons.min.css">
 
-  <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="78">
-    <!--Navbar Start-->
-    <nav
-      class="navbar navbar-expand-lg fixed-top navbar-custom sticky-dark"
-      id="sticky"
-    >
-      <div class="container-fluid">
-        <!-- LOGO -->
-        <a class="logo text-uppercase" href="index.html">
-          <img
-            src="images/logo-light.png"
-            alt=""
-            class="logo-light"
-            height="21"
-          />
-          <img
-            src="images/logo-dark.png"
-            alt=""
-            class="logo-dark"
-            height="21"
-          />
+  <!-- Custom Modern CSS -->
+  <link rel="stylesheet" href="css/modern.css">
+</head>
+
+<body>
+  <!-- Animated Background -->
+  <div class="animated-bg"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container-fluid">
+      <a href="#home" class="logo">ZEDOTECH</a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="mdi mdi-menu"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link"><i class="mdi mdi-home"></i> Home</a></li>
+        <li><a href="#features" class="nav-link"><i class="mdi mdi-feature-search"></i> Features</a></li>
+        <li><a href="#cooperate" class="nav-link"><i class="mdi mdi-account-multiple"></i> Collaboration</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1 class="hero-title animate-in">Welcome to ZEDOTECH</h1>
+      <p class="hero-subtitle animate-in">
+        融合 <span class="text-gradient">15年+開發經驗</span> 與 <span class="text-gradient">創新科技</span>，為您打造專屬數位解決方案
+      </p>
+
+      <div class="hero-description animate-in">
+        <p>
+          歡迎來到 <strong
+            style="color: var(--accent-yellow);">ZEDOTECH</strong>！作為一位擁有超過15年開發與專案經驗的工程師，我能專注聆聽您的需求，規畫最適合您的方案。
+        </p>
+
+        <ul>
+          <li><strong class="text-gradient">AI應用開發</strong>：融合最新人工智能技術，為您的業務賦能</li>
+          <li><strong class="text-gradient">全端網站開發</strong>：從前端到後端，打造完整且一致的網路生態系統</li>
+          <li><strong class="text-gradient">雲端服務整合</strong>：提供網域註冊、伺服器租用等一站式服務</li>
+          <li><strong class="text-gradient">客製化軟體開發</strong>：根據您的獨特需求，量身定制最佳解決方案</li>
+        </ul>
+
+        <p>
+          我擅長使用 <strong>ASP.NET Core (C#)、Javascript、jQuery、CSS</strong>
+          等技術。無論是<strong>網站、桌面應用（Winform）還是控制台程序（Console）</strong>，我都能夠靈活運用這些技術，為您開發出高效、穩定、安全的應用程式。
+        </p>
+      </div>
+
+      <div class="hero-cta animate-in">
+        <a href="mailto:nicky@zedotech.com" class="btn btn-primary">
+          <i class="mdi mdi-email"></i>
+          聯繫我
         </a>
+        <a href="#features" class="btn btn-secondary">
+          <i class="mdi mdi-arrow-down"></i>
+          探索更多
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          style="color: black"
-        >
-          <i class="mdi mdi-menu"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mx-auto navbar-center" id="mySidenav">
-            <li class="nav-item">
-              <a href="#home" class="nav-link"><i class="mdi mdi-home"></i> Home</a>
-            </li>
-            <!-- <li class="nav-item">
-              <a href="#demo" class="nav-link"><i class="mdi mdi-projector"></i> Portfolio</a>
-            </li> -->
-            <li class="nav-item">
-              <a href="#features" class="nav-link"><i class="mdi mdi-feature-search"></i> Features</a>
-            </li>
-            <li class="nav-item">
-              <a href="#cooperate" class="nav-link"><i class="mdi mdi-account-multiple"></i> Collaboration</a>
-            </li>
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="section-title">
+      <h2>企業後台系統</h2>
+      <p>為您的企業設計專屬應用程式</p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/core.png" alt="多國語系">
+        </div>
+        <h3>多國語系支援</h3>
+        <p>支援多國語系，讓您的應用程式更具國際化</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/ipad.png" alt="電子名片">
+        </div>
+        <h3>電子名片設計</h3>
+        <p>個人資訊編輯（名稱、頭像、卡牌背景、聯絡信箱、個人簡歷、其他連結、是否公開）</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/chart.png" alt="儀表板">
+        </div>
+        <h3>儀表板</h3>
+        <p>各項報表、銷售與流量統計</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/blogger.png" alt="部落格">
+        </div>
+        <h3>部落格</h3>
+        <p>為您的品牌建立部落格，提供最新消息與產品資訊</p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/drawing.png" alt="Banner設計">
+        </div>
+        <h3>Banner 設計</h3>
+        <p>為您的網站建立廣告Banner，提供最新的優惠與活動訊息給客戶</p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/medicinecart.png" alt="商品上架">
+        </div>
+        <h3>商品上架</h3>
+        <p>為您的網站上架商品，自定義商品名稱、價格、庫存、圖片、描述、分類、標籤</p>
+      </div>
+
+      <!-- Feature 7 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/browsersettings.png" alt="首頁設計">
+        </div>
+        <h3>首頁設計</h3>
+        <p>讓您自行決定網站首頁的商品區塊該如何排列，最大化商品曝光率，隨時更改、即時生效</p>
+      </div>
+
+      <!-- Feature 8 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/priest.png" alt="會員系統">
+        </div>
+        <h3>會員系統</h3>
+        <p>隨時掌握會員資料、訂單，可從Excel匯入會員資料、編輯會員啟用狀態</p>
+      </div>
+
+      <!-- Feature 9 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/dollarbag.png" alt="訂單列表">
+        </div>
+        <h3>訂單列表</h3>
+        <p>顯示所有訂單，可依照訂單狀態進行篩選、編輯訂單處理狀態</p>
+      </div>
+
+      <!-- Feature 10 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/bill.png" alt="權限管理">
+        </div>
+        <h3>權限管理</h3>
+        <p>為每個可以登入後台的員工設定不同角色的權限，保護您的資料安全</p>
+      </div>
+
+      <!-- Feature 11 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/browserpen.png" alt="客製化網站">
+        </div>
+        <h3>客製化官方網站</h3>
+        <p>依據您的需求以及後台相關資料，設計符合您企業形象的官方網站，提供最新消息、產品資訊、聯絡方式等</p>
+      </div>
+
+      <!-- Feature 12 -->
+      <div class="feature-card glass animate-in">
+        <div class="feature-icon">
+          <img src="images/icons/clouding.png" alt="即時互動">
+        </div>
+        <h3>前、後台即時互動</h3>
+        <p>隨時掌握前台客戶的動態，即時回應客戶問題，提供最佳的客戶服務</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collaboration Section -->
+  <section class="section" id="cooperate">
+    <div class="section-title">
+      <h2>合作模式</h2>
+      <p>Collaboration Model</p>
+    </div>
+
+    <div class="collab-container">
+      <!-- Collaboration Item 1 -->
+      <div class="collab-item">
+        <div class="collab-image">
+          <img src="images/features-img/img-2.png" alt="專屬應用程式開發">
+        </div>
+        <div class="collab-content">
+          <div class="collab-icon">
+            <i class="mdi mdi-chart-bar"></i>
+          </div>
+          <h3>為您的企業設計的專屬應用程式</h3>
+          <p>結合您的業務與商業模式，配合您的團隊，開發屬於您的系統。我們的專屬應用程式開發流程包括：</p>
+          <ul>
+            <li>深入了解您的業務需求和目標</li>
+            <li>制定詳細的系統設計和開發計劃</li>
+            <li>採用敏捷開發方法，確保靈活性和快速反饋</li>
+            <li>提供持續的技術支持和系統優化</li>
           </ul>
         </div>
       </div>
-    </nav>
-    <!-- Navbar End -->
 
-    <!-- home start -->
-    <section class="bg-home bg-gradient" id="home">
-      <div class="home-center">
-        <div class="home-desc-center">
-          <div class="container-fluid">
-            <div class="row align-items-center">
-              <div class="col-lg-12">
-                <div class="home-title mo-mb-20">
-                  <h1 class="mb-4 zt-title">Welcome to ZEDOTECH</h1>
-                  <div class="home-desc text-white">
-                    <p>
-                      歡迎來到 <strong style="color:#fddd43;">ZEDOTECH</strong>！作為一位擁有超過15年開發與專案經驗的工程師，我能專注聆聽您的需求，規畫最適合您的方案。我的專業服務包括：
-                    </p>
-                    <ul>
-                      <li><strong>AI應用開發</strong>：融合最新人工智能技術，為您的業務賦能</li>
-                      <li><strong>全端網站開發</strong>：從前端到後端，打造完整且一致的網路生態系統</li>
-                      <li><strong>雲端服務整合</strong>：提供網域註冊、伺服器租用等一站式服務</li>
-                      <li><strong>客製化軟體開發</strong>：根據您的獨特需求，量身定制最佳解決方案</li>
-                    </ul>
-                    <p>
-                      我擅長使用 <strong>ASP.NET Core(C#)、Javascript、jQuery、CSS</strong>等。無論是<strong>網站、桌面應用（Winform）還是控制台程序（Console）</strong>，我都能夠靈活運用這些技術，為您開發出高效、穩定、安全的應用程式。
-                    </p>
-                    <p class="mb-5">
-                      您的需求就是我的創新動力。如果您正在尋找能夠真正理解並實現您願景的技術合作夥伴，歡迎<a href="mailto:nicky@zedotech.com" class="text-warning"><strong>聯繫我</strong></a>。讓我們攜手共創，將您的業務願景轉化為現實，打造屬於您的數位成功故事！
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end row -->
+      <!-- Collaboration Item 2 -->
+      <div class="collab-item">
+        <div class="collab-image">
+          <img src="images/features-img/img-1.png" alt="團隊協作">
+        </div>
+        <div class="collab-content">
+          <div class="collab-icon">
+            <i class="mdi mdi-auto-fix"></i>
           </div>
-          <!-- end container-fluid -->
+          <h3>和您的團隊一起探索與發想</h3>
+          <p>為您提供技術支援、開發與架構建議，您與團隊只管全力衝刺。我們的協作方式包括：</p>
+          <ul>
+            <li>定期的頭腦風暴和創意工作坊</li>
+            <li>技術可行性分析和原型開發</li>
+            <li>專業的項目管理和進度追蹤</li>
+            <li>靈活的溝通渠道，確保及時反饋和調整</li>
+          </ul>
         </div>
       </div>
-    </section>
-    <!-- home end -->
 
-    <!-- clients start -->
-    <<section class="mt-sm-5 mt-lg-2" style="z-index:99;position: inherit; display:none;">
-      <div class="container-fluid">
-          <div class="clients p-2 bg-white">
-              <div class="row">
-                  <div class="col-3">
-                      <div class="client-images">
-                          <a href="https://portalz.cc/" target="_blank"><img src="/images/clients/logo.portalz.png" alt="logo-img" class="mx-auto img-fluid d-block" title="PortalZ 後台管理網站"></a>
-                      </div>
-                  </div>
-                  <div class="col-3">
-                      <div class="client-images">
-                          <a href="https://storez.cc" target="_blank"><img src="/images/clients/logo.storez.png" alt="logo-img" class="mx-auto img-fluid d-block" title="StoreZ 電商網站"></a>
-                      </div>
-                  </div>
-                  <div class="col-3">
-                      <div class="client-images">
-                          <a href="https://chat.openai.com/g/g-bGttqy0XN-zedotech-ke-fu-ji-qi-ren" target="_blank"><img src="/images/clients/logo.zedotech.jpg" alt="logo-img" class="mx-auto img-fluid d-block" title="GPTs 客服機器人"></a>
-                      </div>
-                  </div>
-                  
-                  <div class="col-3">
-                    <div class="client-images">
-                        <a href="https://chat.openai.com/g/g-VK7T6vE05-tech-news-today-tnt" target="_blank"><img src="/images/clients/logo.tnt.png" alt="logo-img" class="mx-auto img-fluid d-block" title="GPTs Tech News Today(TNT)"></a>
-                    </div>
-                </div>
-              </div> <!-- end row -->
-          </div>
-      </div> <!-- end container-fluid -->
-  </section>
-  <!-- clients end -->
-
-    <!-- 企業後台系統 features start -->
-    <section class="section-sm" id="features">
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <div class="text-center mb-4 pb-1">
-              <h2 class="mb-3">企業後台系統</h2>
-              <p class="text-muted">
-                為您的企業設計專屬應用程式
-              </p>
-            </div>
-          </div>
+      <!-- Collaboration Item 3 -->
+      <div class="collab-item">
+        <div class="collab-image">
+          <img src="images/features-img/img-2.png" alt="雲端解決方案">
         </div>
-        <!-- end row -->
-        <div class="row">
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/core.png" alt="" />
-              </div>
-              <h3 class="mb-2">多國語系支援</h3>
-              <p class="text-muted">
-                支援多國語系，讓您的應用程式更具國際化
-              </p>
-            </div>
+        <div class="collab-content">
+          <div class="collab-icon">
+            <i class="mdi mdi-cloud"></i>
           </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/ipad.png" alt="" />
-              </div>
-              <h3 class="mb-2">電子名片設計</h3>
-              <p class="text-muted">
-                個人資訊編輯(名稱、頭像、卡牌背景、聯絡信箱、個人簡歷、其他連結、是否公開)
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/chart.png" alt="" />
-              </div>
-              <h3 class="mb-2">儀表板</h3>
-              <p class="text-muted">各項報表、銷售與流量統計</p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/blogger.png" alt="" />
-              </div>
-              <h3 class="mb-2">部落格</h3>
-              <p class="text-muted">
-                為您的品牌建立部落格，提供最新消息與產品資訊
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/drawing.png" alt="" />
-              </div>
-              <h3 class="mb-2">Banner 設計</h3>
-              <p class="text-muted">
-                為您的網站建立廣告Banner，提供最新的優惠與活動訊息給客戶
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/medicinecart.png" alt="" />
-              </div>
-              <h3 class="mb-2">商品上架</h3>
-              <p class="text-muted">
-                為您的網站上架商品，自定義商品名稱、價格、庫存、圖片、描述、分類、標籤
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/browsersettings.png" alt="" />
-              </div>
-              <h3 class="mb-2">首頁設計</h3>
-              <p class="text-muted">
-                讓您自行決定網站首頁的商品區塊該如何排列，最大化商品曝光率，隨時更改、即時生效
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/priest.png" alt="" />
-              </div>
-              <h3 class="mb-2">會員系統</h3>
-              <p class="text-muted">
-                隨時掌握會員資料、訂單，可從Excel匯入會員資料、編輯會員啟用狀態
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/dollarbag.png" alt="" />
-              </div>
-              <h3 class="mb-2">訂單列表</h3>
-              <p class="text-muted">
-                顯示所有訂單，可依照訂單狀態進行篩選、編輯訂單處理狀態
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/bill.png" alt="" />
-              </div>
-              <h3 class="mb-2">權限管理</h3>
-              <p class="text-muted">
-                為每個可以登入後台的員工設定不同角色的權限，保護您的資料安全
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/browserpen.png" alt="" />
-              </div>
-              <h3 class="mb-2">客製化官方網站</h3>
-              <p class="text-muted">
-                依據您的需求以及後台相關資料，設計符合您企業形象的官方網站，提供最新消息、產品資訊、聯絡方式等
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="features-box">
-              <div class="features-img mb-4">
-                <img src="images/icons/clouding.png" alt="" />
-              </div>
-              <h3 class="mb-2">前、後台即時互動</h3>
-              <p class="text-muted">
-                隨時掌握前台客戶的動態，即時回應客戶問題，提供最佳的客戶服務
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
+          <h3>雲端解決方案與系統優化</h3>
+          <p>幫助您的業務實現雲端轉型，提高系統效能和可擴展性。我們提供：</p>
+          <ul>
+            <li>雲端遷移策略和實施</li>
+            <li>混合雲和多雲環境設計</li>
+            <li>雲端原生應用開發</li>
+            <li>持續的性能監控和優化服務</li>
+          </ul>
         </div>
-        <!-- end row -->
       </div>
-      <!-- end container-fluid -->
-    </section>
-    <!-- features end -->
-
-  <section class="section bg-dark" style="padding:20px 0 20px 0;">
-    
+    </div>
   </section>
 
-    <!-- available demos start -->
-    <section class="section bg-light d-none" id="demo">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="title text-center mb-3">
-              <h3>作品範例</h3>
-              <p class="text-muted">Portfolio.</p>
-            </div>
-          </div>
-        </div>
-        <!-- end row -->
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <span id="currentYear"></span> © ZEDOTECH |
+        Contact: <a href="mailto:nicky@zedotech.com">nicky@zedotech.com</a> |
+        <a href="webuse.html">使用條款</a> |
+        <a href="privacy.html">隱私權政策</a>
+      </p>
+    </div>
+  </footer>
 
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <div class="demo-box bg-dark mt-4 p-2">
-              <a href="https://chat.openai.com/g/g-VK7T6vE05-tech-news-today-tnt" target="_blank" class="text-light">
-                <img
-                  src="images/demo/tnt.png"
-                  alt=""
-                  class="img-fluid mx-auto d-block"
-                />
-                <div class="p-3 text-center">
-                  <h5 class="mb-0 text-light">GPTs Tech News Today(TNT)</h5>
-                </div>
-              </a>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-6 col-md-6">
-            <div class="demo-box bg-dark mt-4 p-2">
-              <a href="https://chat.openai.com/g/g-bGttqy0XN-zedotech-ke-fu-ji-qi-ren" target="_blank" class="text-light">
-                <img
-                  src="images/demo/zedotechgpts.png"
-                  alt=""
-                  class="img-fluid mx-auto d-block"
-                />
-                <div class="p-3 text-center">
-                  <h5 class="mb-0 text-light">GPTs 客服機器人</h5>
-                </div>
-              </a>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-6 col-md-6">
-            <div class="demo-box bg-dark mt-4 p-2">
-              <a href="#" class="text-light">
-                <img
-                  src="images/demo/SilverCoreBE.png"
-                  alt=""
-                  class="img-fluid mx-auto d-block"
-                />
-                <div class="p-3 text-center">
-                  <h5 class="mb-0 text-light">PortalZ 後台管理網站</h5>
-                </div>
-              </a>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-6 col-md-6">
-            <div class="demo-box bg-dark mt-4 p-2">
-              <a href="#" class="text-light">
-                <img
-                  src="images/demo/demo10.png"
-                  alt=""
-                  class="img-fluid mx-auto d-block"
-                />
-                <div class="p-3 text-center">
-                  <h5 class="mb-0 text-light">StoreZ 電商網站</h5>
-                </div>
-              </a>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-6 col-md-6">
-            <div class="demo-box bg-dark mt-4 p-2">
-              <a target="_blank" href="https://opensea.io/collection/random-narwhal-club" class="text-light">
-                <img
-                  src="images/demo/OPENSEA01.png"
-                  alt=""
-                  class="img-fluid mx-auto d-block"
-                />
-                <div class="p-3 text-center">
-                  <h5 class="mb-0 text-light">NFT 批量製作上架 OpenSea</h5>
-                </div>
-              </a>
-            </div>
-          </div>
-          <!-- end col -->
-          <div class="col-lg-6 col-md-6">
-            <div class="demo-box bg-dark mt-4 p-2">
-              <a href="#" class="text-light">
-                <img
-                  src="images/demo/SilverCoreAPI.png"
-                  alt=""
-                  class="img-fluid mx-auto d-block"
-                />
-                <div class="p-3 text-center">
-                  <h5 class="mb-0 text-light">Swagger Open API</h5>
-                </div>
-              </a>
-            </div>
-          </div>
-          <!-- end col -->
-        </div>
-        <!-- end row -->
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="mdi mdi-chevron-up"></i>
+  </button>
 
-        <!-- <div class="row">
-                    <div class="col-12">
-                        <div class="text-center mt-4">
-                            <button class="btn btn-info navbar-btn">More Demos <i class="mdi mdi-arrow-right"></i></button>
-                        </div>
-                    </div>
-                </div> -->
-        <!-- end row -->
-      </div>
-      <!-- end container-fluid -->
-    </section>
-    <!-- available demos end -->
+  <!-- JavaScript -->
+  <script src="js/modern.js"></script>
+</body>
 
-    <!-- cooperate start -->
-    <section class="section" id="cooperate">
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <div class="text-center pb-1">
-              <h3>合作模式</h3>
-              <p class="text-muted">Collaboration Model.</p>
-            </div>
-          </div>
-        </div>
-    
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="feature-img">
-              <img src="images/features-img/img-2.png" alt="Custom Application Development" class="img-fluid mx-auto d-block" />
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="p-5 features-content">
-              <div class="features-icon mb-4">
-                <i class="mdi mdi-chart-bar h4 text-white text-center"></i>
-              </div>
-              <h3 class="mb-3">為您的企業設計的專屬應用程式</h3>
-              <p class="text-muted mb-4">
-                結合您的業務與商業模式，配合您的團隊，開發屬於您的系統。我們的專屬應用程式開發流程包括：
-              </p>
-              <ul class="text-muted">
-                <li>深入了解您的業務需求和目標</li>
-                <li>制定詳細的系統設計和開發計劃</li>
-                <li>採用敏捷開發方法，確保靈活性和快速反饋</li>
-                <li>提供持續的技術支持和系統優化</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-    
-        <div class="row align-items-center mt-5">
-          <div class="col-lg-6">
-            <div class="p-5 features-content">
-              <div class="features-icon mb-4">
-                <i class="mdi mdi-auto-fix h4 text-white text-center"></i>
-              </div>
-              <h3 class="mb-3">和您的團隊一起探索與發想</h3>
-              <p class="text-muted mb-4">
-                為您提供技術支援、開發與架構建議，您與團隊只管全力衝刺。我們的協作方式包括：
-              </p>
-              <ul class="text-muted">
-                <li>定期的頭腦風暴和創意工作坊</li>
-                <li>技術可行性分析和原型開發</li>
-                <li>專業的項目管理和進度追蹤</li>
-                <li>靈活的溝通渠道，確保及時反饋和調整</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="feature-img">
-              <img src="images/features-img/img-1.png" alt="Team Collaboration" class="img-fluid mx-auto d-block" />
-            </div>
-          </div>
-        </div>
-    
-        <div class="row align-items-center mt-5">
-          <div class="col-lg-6">
-            <div class="feature-img">
-              <img src="images/features-img/img-2.png" alt="AI Integration" class="img-fluid mx-auto d-block" />
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="p-5 features-content">
-              <div class="features-icon mb-4">
-                <i class="mdi mdi-chart-bar h4 text-white text-center"></i>
-              </div>
-              <h3 class="mb-3">雲端解決方案與系統優化</h3>
-              <p class="text-muted mb-4">
-                幫助您的業務實現雲端轉型，提高系統效能和可擴展性。我們提供：
-              </p>
-              <ul class="text-muted">
-                <li>雲端遷移策略和實施</li>
-                <li>混合雲和多雲環境設計</li>
-                <li>雲端原生應用開發</li>
-                <li>持續的性能監控和優化服務</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-    
-      </div>
-    </section>
-    <!-- cooperate end -->
-
-    <!-- footer start -->
-    <footer class="bg-dark footer">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="float-start pull-none">
-              <p class="text-white-50">
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                &copy;ZEDOTECH <b>|</b> Contact me:
-                <a class="text-white" href="mailto:nicky@zedotech.com"
-                  >nicky@zedotech.com</a
-                > <b>|</b> <a href="webuse.html" class="text-white">使用條款</a> <b>|</b> <a href="privacy.html" class="text-white">隱私權政策</a>
-              </p>
-            </div>
-          </div>
-          <!-- end col -->
-        </div>
-        <!-- end row -->
-      </div>
-      <!-- container-fluid -->
-    </footer>
-    <!-- footer end -->
-
-    <!-- Back to top -->
-    <!-- <a href="#" class="back-to-top" id="back-to-top"> <i class="mdi mdi-chevron-up"> </i> </a> -->
-    <!-- Back to top -->
-    <a
-      href="#"
-      onclick="topFunction()"
-      class="back-to-top-btn btn btn-primary"
-      id="back-to-top-btn"
-      ><i class="mdi mdi-chevron-up"></i
-    ></a>
-
-    <div class="codebg"></div>
-    <!-- javascript -->
-
-    <script src="js/bootstrap.bundle.min.js"></script>
-
-    <!-- custom js -->
-    <script src="js/app.js"></script>
-  </body>
 </html>

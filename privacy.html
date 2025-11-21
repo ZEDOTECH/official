@@ -1,176 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3N0X9YRHN"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-
-    gtag("config", "G-D3N0X9YRHN");
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-D3N0X9YRHN');
   </script>
-  <meta charset="utf-8" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO Meta Tags -->
   <title>隱私權政策 - ZEDOTECH</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta content="為個人和企業提供全方位的網路解決方案，包括網域註冊、雲端伺服器租用、網站開發、上線等服務，讓您可以一站完成。" name="description" />
-  <meta content="ZEDOTECH" name="author" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="ZEDOTECH 隱私權政策 - 了解我們如何收集、使用和保護您的個人資訊。">
+  <meta name="author" content="ZEDOTECH">
 
-  <!-- App favicon -->
-  <link rel="shortcut icon" href="images/favicon.ico" />
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="images/favicon.ico">
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
-  <!--Material Icon -->
-  <link rel="stylesheet" type="text/css" href="css/materialdesignicons.min.css" />
+  <!-- Material Design Icons -->
+  <link rel="stylesheet" href="css/materialdesignicons.min.css">
 
-  <!--Font-->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet" />
+  <!-- Custom Modern CSS -->
+  <link rel="stylesheet" href="css/modern.css">
 
-  <!-- Custom  sCss -->
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <link rel="stylesheet" type="text/css" href="css/custom.css" />
   <style>
-    h1,
-    h2 {
-      color: white;
-      font-family: 'Righteous', cursive;
-      color: #fddd43;
-      font-weight: bold;
+    .content-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 120px var(--spacing-md) var(--spacing-xl);
+    }
+
+    .page-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: var(--spacing-lg);
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+
+    .content-box {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--blur-md));
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .content-box h2 {
+      color: var(--accent-cyan);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-top: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .content-box h2:first-child {
+      margin-top: 0;
+    }
+
+    .content-box p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .content-box ul {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      padding-left: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .content-box li {
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .intro-text {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: var(--spacing-lg);
+      line-height: 1.8;
     }
   </style>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="78">
-  <!--Navbar Start-->
-  <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky-dark" id="sticky">
+<body>
+  <!-- Animated Background -->
+  <div class="animated-bg"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
     <div class="container-fluid">
-      <!-- LOGO -->
-      <a class="logo text-uppercase" href="index.html">
-        <img src="images/logo-light.png" alt="" class="logo-light" height="21" />
-        <img src="images/logo-dark.png" alt="" class="logo-dark" height="21" />
-      </a>
+      <a href="index_modern.html" class="logo">ZEDOTECH</a>
 
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="mdi mdi-menu"></i>
+      </button>
 
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index_modern.html" class="nav-link"><i class="mdi mdi-home"></i> 返回首頁</a></li>
+        <li><a href="webuse.html" class="nav-link"><i class="mdi mdi-file-document"></i> 使用條款</a></li>
+      </ul>
     </div>
   </nav>
-  <!-- Navbar End -->
 
-  <!-- home start -->
-  <section class="bg-home bg-gradient text-light" id="home">
-    <div class="home-center">
-      <div class="home-desc-center">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12">
-              <h1 id="privacy-policy-for-zedotech" class="zt-title">ZEDOTECH - 隱私權政策</h1>
+  <!-- Content Section -->
+  <section class="content-section">
+    <h1 class="page-title animate-in">隱私權政策</h1>
 
-              <p>在 ZEDOTECH（網址：https://www.zedotech.com），我們的主要優先事項之一是訪客的隱私。本隱私權政策文件包含 ZEDOTECH 收集和記錄的信息類型以及我們如何使用它。</p>
+    <p class="intro-text animate-in">
+      在 ZEDOTECH（網址：https://www.zedotech.com），我們的主要優先事項之一是訪客的隱私。<br>
+      本隱私權政策文件包含 ZEDOTECH 收集和記錄的信息類型以及我們如何使用它。
+    </p>
 
-              <p>如果您對我們的隱私權政策有其他問題或需要更多信息，請隨時與我們聯繫。</p>
+    <div class="content-box animate-in">
+      <p>如果您對我們的隱私權政策有其他問題或需要更多信息，請隨時與我們聯繫。</p>
 
-              <p>本隱私權政策僅適用於我們的在線活動，並適用於訪問我們網站的訪客，涉及他們在 ZEDOTECH 分享和/或收集的信息。本政策不適用於通過本網站以外的渠道收集的任何信息或離線收集的信息。</p>
+      <p>本隱私權政策僅適用於我們的在線活動，並適用於訪問我們網站的訪客，涉及他們在 ZEDOTECH 分享和/或收集的信息。本政策不適用於通過本網站以外的渠道收集的任何信息或離線收集的信息。</p>
 
-              <h2>同意</h2>
-              <p>使用我們的網站即表示您同意我們的隱私權政策並同意其條款。</p>
+      <h2>同意</h2>
+      <p>使用我們的網站即表示您同意我們的隱私權政策並同意其條款。</p>
 
-              <h2>我們收集的信息</h2>
-              <p>我們會在要求您提供個人信息時，明確告知您為什麼需要提供這些信息。</p>
+      <h2>我們收集的信息</h2>
+      <p>我們會在要求您提供個人信息時，明確告知您為什麼需要提供這些信息。</p>
 
-              <p>如果您直接與我們聯繫，我們可能會收到有關您的其他信息，例如您的姓名、電子郵件地址、電話號碼、您可能發送給我們的消息和/或附件的內容，以及您可能選擇提供的任何其他信息。</p>
+      <p>如果您直接與我們聯繫，我們可能會收到有關您的其他信息，例如您的姓名、電子郵件地址、電話號碼、您可能發送給我們的消息和/或附件的內容，以及您可能選擇提供的任何其他信息。</p>
 
-              <p>當您註冊帳戶時，我們可能會要求您提供聯繫信息，包括姓名、公司名稱、地址、電子郵件地址和電話號碼等項目。</p>
+      <p>當您註冊帳戶時，我們可能會要求您提供聯繫信息，包括姓名、公司名稱、地址、電子郵件地址和電話號碼等項目。</p>
 
-              <h2>我們如何使用您的信息</h2>
-              <p>我們以各種方式使用收集的信息，包括：</p>
-              <ul>
-                <li>提供、運營和維護我們的網站</li>
-                <li>改進、個性化和擴展我們的網站</li>
-                <li>了解和分析您如何使用我們的網站</li>
-                <li>開發新產品、服務、功能和功能</li>
-                <li>與您溝通，直接或通過我們的合作夥伴之一，包括客戶服務，以提供您與網站相關的更新和其他信息，以及用於營銷和促銷目的</li>
-                <li>發送電子郵件給您</li>
-                <li>查找和預防欺詐</li>
-              </ul>
+      <h2>我們如何使用您的信息</h2>
+      <p>我們以各種方式使用收集的信息，包括：</p>
+      <ul>
+        <li>提供、運營和維護我們的網站</li>
+        <li>改進、個性化和擴展我們的網站</li>
+        <li>了解和分析您如何使用我們的網站</li>
+        <li>開發新產品、服務、功能和功能</li>
+        <li>與您溝通，直接或通過我們的合作夥伴之一，包括客戶服務，以提供您與網站相關的更新和其他信息，以及用於營銷和促銷目的</li>
+        <li>發送電子郵件給您</li>
+        <li>查找和預防欺詐</li>
+      </ul>
 
-              <h2>日誌文件</h2>
-              <p>ZEDOTECH 遵循使用日誌文件的標準程序。這些文件在訪客訪問網站時記錄訪客。所有託管公司都這樣做，這是託管服務分析的一部分。日誌文件收集的信息包括互聯網協議 (IP) 地址、瀏覽器類型、互聯網服務提供商
-                (ISP)、日期和時間戳、引用/退出頁面，可能還有點擊次數。這些不與任何個人身份信息相關聯。信息的目的是分析趨勢、管理網站、跟踪用戶在網站上的移動以及收集人口統計信息。</p>
+      <h2>日誌文件</h2>
+      <p>ZEDOTECH 遵循使用日誌文件的標準程序。這些文件在訪客訪問網站時記錄訪客。所有託管公司都這樣做，這是託管服務分析的一部分。日誌文件收集的信息包括互聯網協議 (IP) 地址、瀏覽器類型、互聯網服務提供商
+        (ISP)、日期和時間戳、引用/退出頁面，可能還有點擊次數。這些不與任何個人身份信息相關聯。信息的目的是分析趨勢、管理網站、跟踪用戶在網站上的移動以及收集人口統計信息。</p>
 
-              <h2>Cookies 和網絡信標</h2>
-              <p>像任何其他網站一樣，ZEDOTECH 使用"cookies"。這些 cookies
-                用於存儲信息，包括訪客的偏好以及訪客訪問或訪問的網站頁面。該信息用於根據訪客的瀏覽器類型和/或其他信息優化用戶體驗，以定制我們的網頁內容。</p>
+      <h2>Cookies 和網絡信標</h2>
+      <p>像任何其他網站一樣，ZEDOTECH 使用 "cookies"。這些 cookies
+        用於存儲信息，包括訪客的偏好以及訪客訪問或訪問的網站頁面。該信息用於根據訪客的瀏覽器類型和/或其他信息優化用戶體驗，以定制我們的網頁內容。</p>
 
-              <h2>第三方隱私權政策</h2>
-              <p>ZEDOTECH 的隱私權政策不適用於其他廣告商或網站。因此，我們建議您查閱這些第三方廣告服務器各自的隱私權政策以獲取更詳細的信息。它可能包括他們的做法以及如何選擇退出某些選項的說明。</p>
+      <h2>第三方隱私權政策</h2>
+      <p>ZEDOTECH 的隱私權政策不適用於其他廣告商或網站。因此，我們建議您查閱這些第三方廣告服務器各自的隱私權政策以獲取更詳細的信息。它可能包括他們的做法以及如何選擇退出某些選項的說明。</p>
 
-              <p>您可以選擇通過您的個人瀏覽器選項禁用 cookies。要了解有關特定網絡瀏覽器的 cookie 管理的更詳細信息，可以在瀏覽器各自的網站上找到。</p>
+      <p>您可以選擇通過您的個人瀏覽器選項禁用 cookies。要了解有關特定網絡瀏覽器的 cookie 管理的更詳細信息，可以在瀏覽器各自的網站上找到。</p>
 
-              <h2>兒童信息</h2>
-              <p>我們的另一個優先事項是在使用互聯網時為兒童增加保護。我們鼓勵父母和監護人觀察、參與和/或監控和指導他們的在線活動。</p>
+      <h2>兒童信息</h2>
+      <p>我們的另一個優先事項是在使用互聯網時為兒童增加保護。我們鼓勵父母和監護人觀察、參與和/或監控和指導他們的在線活動。</p>
 
-              <p>ZEDOTECH 不會故意收集 13 歲以下兒童的任何個人身份信息。如果您認為您的孩子在我們的網站上提供了此類信息，我們強烈鼓勵您立即與我們聯繫，我們將盡最大努力迅速從我們的記錄中刪除此類信息。</p>
+      <p>ZEDOTECH 不會故意收集 13 歲以下兒童的任何個人身份信息。如果您認為您的孩子在我們的網站上提供了此類信息，我們強烈鼓勵您立即與我們聯繫，我們將盡最大努力迅速從我們的記錄中刪除此類信息。</p>
 
-              <h2>本隱私權政策的變更</h2>
-              <p>我們可能會不時更新我們的隱私權政策。因此，我們建議您定期查看此頁面以了解任何變更。我們將通過在此頁面上發布新的隱私權政策來通知您任何變更。這些變更在發布在此頁面上後立即生效。</p>
+      <h2>本隱私權政策的變更</h2>
+      <p>我們可能會不時更新我們的隱私權政策。因此，我們建議您定期查看此頁面以了解任何變更。我們將通過在此頁面上發布新的隱私權政策來通知您任何變更。這些變更在發布在此頁面上後立即生效。</p>
 
-              <h2>聯繫我們</h2>
-              <p>如果您對我們的隱私權政策有任何問題或建議，請隨時與我們聯繫。</p>
-            </div>
-          </div>
-          <!-- end row -->
-        </div>
-        <!-- end container-fluid -->
-      </div>
+      <h2>聯繫我們</h2>
+      <p>如果您對我們的隱私權政策有任何問題或建議，請隨時與我們聯繫：<a href="mailto:nicky@zedotech.com"
+          style="color: var(--accent-cyan);">nicky@zedotech.com</a></p>
     </div>
   </section>
-  <!-- home end -->
 
-  <!-- footer start -->
-  <footer class="bg-dark footer">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="float-start pull-none">
-            <p class="text-white-50">
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              &copy;ZEDOTECH <b>|</b> Contact me:
-              <a class="text-white" href="mailto:nicky@zedotech.com"
-                >nicky@zedotech.com</a
-              > <b>|</b> <a href="webuse.html" class="text-white">使用條款</a> <b>|</b> <a href="privacy.html" class="text-white">隱私權政策</a>
-            </p>
-          </div>
-        </div>
-        <!-- end col -->
-      </div>
-      <!-- end row -->
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <span id="currentYear"></span> © ZEDOTECH |
+        Contact: <a href="mailto:nicky@zedotech.com">nicky@zedotech.com</a> |
+        <a href="webuse.html">使用條款</a> |
+        <a href="privacy.html">隱私權政策</a>
+      </p>
     </div>
-    <!-- container-fluid -->
   </footer>
-  <!-- footer end -->
 
-  <!-- Back to top -->
-  <!-- <a href="#" class="back-to-top" id="back-to-top"> <i class="mdi mdi-chevron-up"> </i> </a> -->
-  <!-- Back to top -->
-  <a href="#" onclick="topFunction()" class="back-to-top-btn btn btn-primary" id="back-to-top-btn"><i
-      class="mdi mdi-chevron-up"></i></a>
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="mdi mdi-chevron-up"></i>
+  </button>
 
-  <div class="codebg"></div>
-  <!-- javascript -->
-
-  <script src="js/bootstrap.bundle.min.js"></script>
-
-  <!-- custom js -->
-  <script src="js/app.js"></script>
+  <!-- JavaScript -->
+  <script src="js/modern.js"></script>
 </body>
 
 </html>
