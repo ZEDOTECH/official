@@ -83,10 +83,10 @@ function initNavigation() {
         const currentScroll = window.pageYOffset;
 
         if (currentScroll > 100) {
-            navbar.style.background = 'rgba(10, 10, 15, 0.95)';
-            navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.05)';
         } else {
-            navbar.style.background = 'rgba(10, 10, 15, 0.8)';
+            navbar.style.background = 'rgba(255, 255, 255, 0.85)';
             navbar.style.boxShadow = 'none';
         }
 
