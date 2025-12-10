@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POST 請求測試工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #667eea;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+
+        input[type="text"]:focus,
+        input[type="url"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .header-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .header-row input {
+            flex: 1;
+        }
+
+        .header-row button {
+            padding: 10px 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+
+        .header-row button:hover {
+            background: #c0392b;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .btn-add {
+            background: #27ae60;
+            color: white;
+            padding: 8px 15px;
+            font-size: 13px;
+        }
+
+        .btn-add:hover {
+            background: #229954;
+        }
+
+        .response-section {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .response-body {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .method-select {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .method-btn {
+            padding: 8px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .method-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .method-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .alert ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .alert li {
+            margin-bottom: 5px;
+        }
+
+        .code-inline {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        .d-none{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 POST 請求測試工具</h1>
+            <p>輕鬆測試你的 API 端點</p>
+        </div>
+
+        <div class="content">
+            <!-- CORS 警告 -->
+            <div class="alert alert-warning d-none" id="corsWarning">
+                <div class="alert-title">⚠️ CORS 跨域問題解決方案</div>
+                <p>如果遇到 CORS 錯誤,請選擇以下任一方式:</p>
+                <ul>
+                    <li><strong>方案 1 (推薦):</strong> 在你的 ASP.NET Core API 專案中加入 CORS 設定</li>
+                    <li><strong>方案 2:</strong> 使用本地伺服器開啟此檔案 (例如: <span class="code-inline">python -m http.server 8000</span>)</li>
+                    <li><strong>方案 3:</strong> 使用瀏覽器擴充功能暫時停用 CORS (僅供測試)</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info d-none">
+                <div class="alert-title">💡 ASP.NET Core CORS 設定範例</div>
+                <p>在 <span class="code-inline">Program.cs</span> 加入:</p>
+                <div style="background: white; padding: 10px; border-radius: 3px; margin-top: 8px; font-family: 'Courier New', monospace; font-size: 11px;">
+                    builder.Services.AddCors(options =><br>
+                    {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;options.AddPolicy("AllowAll", policy =><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                    });<br><br>
+                    app.UseCors("AllowAll");
+                </div>
+            </div>
+
+            <!-- HTTP 方法選擇 -->
+            <div class="section">
+                <div class="section-title">HTTP 方法</div>
+                <div class="method-select">
+                    <button class="method-btn active" data-method="POST">POST</button>
+                    <button class="method-btn" data-method="GET">GET</button>
+                    <button class="method-btn" data-method="PUT">PUT</button>
+                    <button class="method-btn" data-method="DELETE">DELETE</button>
+                    <button class="method-btn" data-method="PATCH">PATCH</button>
+                </div>
+            </div>
+
+            <!-- URL -->
+            <div class="section">
+                <div class="section-title">請求 URL</div>
+                <div class="input-group">
+                    <input type="url" id="url" placeholder="https://api.example.com/endpoint" value="https://jsonplaceholder.typicode.com/posts">
+                </div>
+            </div>
+
+            <!-- Headers -->
+            <div class="section">
+                <div class="section-title">Headers (請求標頭)</div>
+                <div id="headers-container">
+                    <div class="header-row">
+                        <input type="text" placeholder="Key" value="Content-Type" class="header-key">
+                        <input type="text" placeholder="Value" value="application/json" class="header-value">
+                        <button onclick="removeHeader(this)">✕</button>
+                    </div>
+                </div>
+                <button class="btn btn-add" onclick="addHeader()">+ 新增 Header</button>
+            </div>
+
+            <!-- Request Body -->
+            <div class="section">
+                <div class="section-title">Request Body</div>
+                <div class="input-group">
+                    <textarea id="requestBody" placeholder='輸入 JSON 格式的資料，例如：
+{
+  "title": "測試標題",
+  "body": "測試內容",
+  "userId": 1
+}'>{
+  "title": "測試文章",
+  "body": "這是測試內容",
+  "userId": 1
+}</textarea>
+                </div>
+                <button class="btn btn-secondary" onclick="formatJSON()">美化 JSON</button>
+                <button class="btn btn-secondary" onclick="clearBody()">清空</button>
+            </div>
+
+            <!-- 發送按鈕 -->
+            <div class="section">
+                <button class="btn btn-primary" onclick="sendRequest()">📤 發送請求</button>
+                <button class="btn btn-secondary" onclick="clearResponse()">清除回應</button>
+                <button class="btn btn-secondary" onclick="clearAllData()">🗑️ 清除所有儲存</button>
+            </div>
+
+            <!-- Loading -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <div>發送中...</div>
+            </div>
+
+            <!-- Response -->
+            <div id="response" class="response-section hidden">
+                <div class="response-header">
+                    <div class="section-title" style="margin: 0;">回應結果</div>
+                    <span id="statusBadge" class="status-badge"></span>
+                </div>
+                <div>
+                    <strong>狀態碼:</strong> <span id="statusCode"></span><br>
+                    <strong>狀態文字:</strong> <span id="statusText"></span><br>
+                    <strong>回應時間:</strong> <span id="responseTime"></span> ms
+                </div>
+                <div style="margin-top: 15px;">
+                    <strong>回應內容:</strong>
+                </div>
+                <div id="responseBody" class="response-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedMethod = 'POST';
+
+        // 初始化 - 載入儲存的資料
+        window.addEventListener('DOMContentLoaded', function() {
+            loadSavedData();
+        });
+
+        // 載入儲存的資料
+        function loadSavedData() {
+            try {
+                // 載入 URL
+                const savedUrl = localStorage.getItem('api_test_url');
+                if (savedUrl) {
+                    document.getElementById('url').value = savedUrl;
+                }
+
+                // 載入 Request Body
+                const savedBody = localStorage.getItem('api_test_body');
+                if (savedBody) {
+                    document.getElementById('requestBody').value = savedBody;
+                }
+
+                // 載入 HTTP 方法
+                const savedMethod = localStorage.getItem('api_test_method');
+                if (savedMethod) {
+                    selectedMethod = savedMethod;
+                    document.querySelectorAll('.method-btn').forEach(btn => {
+                        if (btn.dataset.method === savedMethod) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                }
+
+                // 載入 Headers
+                const savedHeaders = localStorage.getItem('api_test_headers');
+                if (savedHeaders) {
+                    const headers = JSON.parse(savedHeaders);
+                    const container = document.getElementById('headers-container');
+                    container.innerHTML = ''; // 清空預設的
+                    headers.forEach(header => {
+                        const row = document.createElement('div');
+                        row.className = 'header-row';
+                        row.innerHTML = `
+                            <input type="text" placeholder="Key" class="header-key" value="${header.key}">
+                            <input type="text" placeholder="Value" class="header-value" value="${header.value}">
+                            <button onclick="removeHeader(this)">✕</button>
+                        `;
+                        container.appendChild(row);
+                    });
+                    // 如果沒有 headers,至少加一個空的
+                    if (headers.length === 0) {
+                        addHeader();
+                    }
+                }
+            } catch (e) {
+                console.error('載入儲存資料失敗:', e);
+            }
+        }
+
+        // 儲存資料
+        function saveData() {
+            try {
+                // 儲存 URL
+                const url = document.getElementById('url').value;
+                localStorage.setItem('api_test_url', url);
+
+                // 儲存 Request Body
+                const body = document.getElementById('requestBody').value;
+                localStorage.setItem('api_test_body', body);
+
+                // 儲存 HTTP 方法
+                localStorage.setItem('api_test_method', selectedMethod);
+
+                // 儲存 Headers
+                const headers = [];
+                document.querySelectorAll('.header-row').forEach(row => {
+                    const key = row.querySelector('.header-key').value.trim();
+                    const value = row.querySelector('.header-value').value.trim();
+                    headers.push({ key, value });
+                });
+                localStorage.setItem('api_test_headers', JSON.stringify(headers));
+            } catch (e) {
+                console.error('儲存資料失敗:', e);
+            }
+        }
+
+        // 初始化按鈕事件
+        document.querySelectorAll('.method-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedMethod = this.dataset.method;
+                saveData(); // 儲存選擇的方法
+            });
+        });
+
+        // 新增 Header
+        function addHeader() {
+            const container = document.getElementById('headers-container');
+            const row = document.createElement('div');
+            row.className = 'header-row';
+            row.innerHTML = `
+                <input type="text" placeholder="Key" class="header-key">
+                <input type="text" placeholder="Value" class="header-value">
+                <button onclick="removeHeader(this)">✕</button>
+            `;
+            container.appendChild(row);
+        }
+
+        // 移除 Header
+        function removeHeader(btn) {
+            btn.parentElement.remove();
+        }
+
+        // 美化 JSON
+        function formatJSON() {
+            const textarea = document.getElementById('requestBody');
+            try {
+                const json = JSON.parse(textarea.value);
+                textarea.value = JSON.stringify(json, null, 2);
+            } catch (e) {
+                alert('JSON 格式錯誤: ' + e.message);
+            }
+        }
+
+        // 清空 Body
+        function clearBody() {
+            document.getElementById('requestBody').value = '';
+            saveData(); // 儲存清空狀態
+        }
+
+        // 清除回應
+        function clearResponse() {
+            document.getElementById('response').classList.add('hidden');
+        }
+
+        // 清除所有儲存的資料
+        function clearAllData() {
+            if (confirm('確定要清除所有儲存的資料嗎?這將清空 URL、Request Body、Headers 和 HTTP 方法。')) {
+                localStorage.removeItem('api_test_url');
+                localStorage.removeItem('api_test_body');
+                localStorage.removeItem('api_test_method');
+                localStorage.removeItem('api_test_headers');
+                
+                // 重新載入頁面以恢復預設值
+                location.reload();
+            }
+        }
+
+        // 發送請求
+        async function sendRequest() {
+            const url = document.getElementById('url').value;
+            const body = document.getElementById('requestBody').value;
+            
+            if (!url) {
+                alert('請輸入 URL');
+                return;
+            }
+
+            // 在發送請求前儲存資料
+            saveData();
+
+            // 收集 Headers
+            const headers = {};
+            document.querySelectorAll('.header-row').forEach(row => {
+                const key = row.querySelector('.header-key').value.trim();
+                const value = row.querySelector('.header-value').value.trim();
+                if (key) {
+                    headers[key] = value;
+                }
+            });
+
+            // 顯示載入中
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('response').classList.add('hidden');
+
+            const startTime = Date.now();
+
+            try {
+                const options = {
+                    method: selectedMethod,
+                    headers: headers
+                };
+
+                // 只有在有 body 且方法支援時才加入
+                if (body && ['POST', 'PUT', 'PATCH'].includes(selectedMethod)) {
+                    options.body = body;
+                }
+
+                const response = await fetch(url, options);
+                const endTime = Date.now();
+                const responseTime = endTime - startTime;
+
+                let responseText;
+                try {
+                    const responseJson = await response.json();
+                    responseText = JSON.stringify(responseJson, null, 2);
+                } catch {
+                    responseText = await response.text();
+                }
+
+                // 隱藏載入中
+                document.getElementById('loading').classList.add('hidden');
+
+                // 顯示回應
+                document.getElementById('response').classList.remove('hidden');
+                document.getElementById('statusCode').textContent = response.status;
+                document.getElementById('statusText').textContent = response.statusText;
+                document.getElementById('responseTime').textContent = responseTime;
+                document.getElementById('responseBody').textContent = responseText;
+
+                const statusBadge = document.getElementById('statusBadge');
+                if (response.ok) {
+                    statusBadge.textContent = '✓ 成功';
+                    statusBadge.className = 'status-badge status-success';
+                } else {
+                    statusBadge.textContent = '✗ 失敗';
+                    statusBadge.className = 'status-badge status-error';
+                }
+
+            } catch (error) {
+                // 隱藏載入中
+                document.getElementById('loading').classList.add('hidden');
+
+                // 顯示錯誤
+                document.getElementById('response').classList.remove('hidden');
+                document.getElementById('statusCode').textContent = 'Error';
+                document.getElementById('statusText').textContent = error.message;
+                document.getElementById('responseTime').textContent = '0';
+                let errorDetail = '請求失敗: ' + error.message + '\n\n';
+                
+                // 判斷是否為 CORS 錯誤
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    errorDetail += '❌ 這很可能是 CORS 跨域問題!\n\n';
+                    errorDetail += '解決方案:\n';
+                    errorDetail += '1. 在伺服器端加入 CORS 設定 (參考上方藍色提示框)\n';
+                    errorDetail += '2. 使用 http-server 或 Live Server 開啟此 HTML\n';
+                    errorDetail += '3. 確認伺服器 URL 是否正確\n\n';
+                    errorDetail += '如果你正在開發 ASP.NET Core API,請在 Program.cs 加入:\n';
+                    errorDetail += 'builder.Services.AddCors(options => {\n';
+                    errorDetail += '    options.AddPolicy("AllowAll", policy => {\n';
+                    errorDetail += '        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();\n';
+                    errorDetail += '    });\n';
+                    errorDetail += '});\n';
+                    errorDetail += 'app.UseCors("AllowAll");';
+                    
+                    // 高亮 CORS 警告
+                    document.getElementById('corsWarning').style.border = '2px solid #ffc107';
+                    document.getElementById('corsWarning').style.animation = 'pulse 1s ease-in-out 3';
+                } else {
+                    errorDetail += '可能原因:\n';
+                    errorDetail += '1. 網路連線問題\n';
+                    errorDetail += '2. URL 不正確\n';
+                    errorDetail += '3. 伺服器無回應\n';
+                    errorDetail += '4. SSL 憑證問題';
+                }
+                
+                document.getElementById('responseBody').textContent = errorDetail;
+
+                const statusBadge = document.getElementById('statusBadge');
+                statusBadge.textContent = '✗ 錯誤';
+                statusBadge.className = 'status-badge status-error';
+            }
+        }
+
+        // 支援 Enter 鍵送出
+        document.getElementById('url').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendRequest();
+            }
+        });
+
+        // URL 輸入框自動儲存
+        document.getElementById('url').addEventListener('blur', function() {
+            saveData();
+        });
+
+        // Request Body 自動儲存
+        document.getElementById('requestBody').addEventListener('blur', function() {
+            saveData();
+        });
+
+        // 每 5 秒自動儲存一次 (避免遺失資料)
+        setInterval(function() {
+            const url = document.getElementById('url').value;
+            const body = document.getElementById('requestBody').value;
+            if (url || body) {
+                saveData();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

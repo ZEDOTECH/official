@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f9fc">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>ZEDOTECH 工具箱</title>
+  <meta name="description" content="ZEDOTECH 實用小工具集錦">
+  <meta name="author" content="ZEDOTECH">
+
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="css/modern.css">
+</head>
+
+<body>
+  <div class="animated-bg"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="container-fluid">
+      <a href="index.html#home" class="logo">ZEDOTECH</a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <i class="mdi mdi-menu"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home" class="nav-link"><i class="mdi mdi-home"></i> Home</a></li>
+        <li><a href="index.html#features" class="nav-link"><i class="mdi mdi-feature-search"></i> Features</a></li>
+        <li><a href="index.html#cooperate" class="nav-link"><i class="mdi mdi-account-multiple"></i> Collaboration</a></li>
+        <li><a href="tools.html" class="nav-link active"><i class="mdi mdi-tools"></i> 工具</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero" id="tools-hero">
+    <div class="hero-content">
+      <h1 class="hero-title animate-in">工具箱</h1>
+      <p class="hero-subtitle animate-in">收錄我製作的實用小工具，協助更快完成工作</p>
+      <div class="hero-cta animate-in">
+        <a href="index.html#cooperate" class="btn btn-secondary"><i class="mdi mdi-arrow-left"></i> 回到主站</a>
+        <a href="mailto:nicky@zedotech.com" class="btn btn-primary"><i class="mdi mdi-email"></i> 聯繫我</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tool-section" id="tools" style="padding-top:0px;margin-bottom: 20px;">
+    <div class="section-title">
+      <h2>已上線的工具</h2>
+      <p>持續新增中，歡迎收藏</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card glass animate-in">
+        <h3>JSON Schema Generator</h3>
+        <p>以 Markdown 列表快速轉成 JSON Schema 範本，支援預設值與類型提示。</p>
+        <div style="margin-top: var(--spacing-sm);">
+          <a class="btn btn-primary" href="tools/json-generator.html" target="_blank" rel="noopener">
+            <i class="mdi mdi-open-in-new"></i> 開啟工具
+          </a>
+        </div>
+      </div>
+
+      <div class="feature-card glass animate-in">
+        <h3>API 請求測試工具</h3>
+        <p>快速發送 GET/POST/PUT/PATCH/DELETE，支援自訂 Header 與 JSON Body，回應即時顯示。</p>
+        <div style="margin-top: var(--spacing-sm);">
+          <a class="btn btn-primary" href="tools/post-test.html" target="_blank" rel="noopener">
+            <i class="mdi mdi-open-in-new"></i> 開啟工具
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <span id="currentYear"></span> © ZEDOTECH |
+        Contact: <a href="mailto:nicky@zedotech.com">nicky@zedotech.com</a> |
+        <a href="webuse.html">使用條款</a> |
+        <a href="privacy.html">隱私權政策</a>
+      </p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="mdi mdi-chevron-up"></i>
+  </button>
+
+  <script src="js/modern.js"></script>
+</body>
+
+</html>

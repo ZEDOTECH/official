@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#f8f9fc">
+
+    <title>JSON Schema Generator | ZEDOTECH</title>
+    <meta name="description" content="以 Markdown 列表快速產出 JSON Schema 範本">
+
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../css/modern.css">
+
+    <style>
+        :root {
+            --panel-bg: rgba(255, 255, 255, 0.9);
+            --panel-border: rgba(0, 0, 0, 0.04);
+        }
+
+        .tool-wrapper {
+            margin: 0 auto;
+            padding: var(--spacing-md);
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        @media (min-width: 992px) {
+            .tool-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .tool-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            height: 100%;
+            backdrop-filter: blur(var(--blur-md));
+            -webkit-backdrop-filter: blur(var(--blur-md));
+        }
+
+        .tool-card:hover {
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-4px);
+            transition: var(--transition);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--panel-border);
+        }
+
+        .panel-title {
+            margin: 0;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-title i {
+            color: var(--accent-primary);
+        }
+
+        .editor-shell {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            min-height: 500px;
+        }
+
+        .editor-textarea {
+            flex: 1;
+            width: 100%;
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            font-family: "Fira Code", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.95rem;
+            background: rgba(248, 249, 252, 0.9);
+            color: var(--text-primary);
+            resize: none;
+            outline: none;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+            transition: border var(--transition), box-shadow var(--transition), background var(--transition);
+        }
+
+        .editor-textarea:focus {
+            border-color: rgba(102, 126, 234, 0.6);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
+            background: #ffffff;
+        }
+
+        .json-output {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .text-danger {
+            color: #d14343;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: var(--spacing-xs);
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .hint {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .badge-soft {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.45rem 0.85rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--accent-primary);
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="container-fluid">
+            <a href="../index.html#home" class="logo">ZEDOTECH</a>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+                <i class="mdi mdi-menu"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html#home" class="nav-link"><i class="mdi mdi-home"></i> Home</a></li>
+                <li><a href="../index.html#features" class="nav-link"><i class="mdi mdi-feature-search"></i> Features</a></li>
+                <li><a href="../index.html#cooperate" class="nav-link"><i class="mdi mdi-account-multiple"></i> Collaboration</a></li>
+                <li><a href="../tools.html" class="nav-link"><i class="mdi mdi-tools"></i> 工具</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="tool-section" id="tool-intro">
+        <div class="tool-section-title">
+            <h2>JSON Schema Generator</h2>
+            <p>以 Markdown 列表快速轉成 JSON 範本，支援型別與預設值。</p>
+        </div>
+    </section>
+
+    <section class="tool-section" id="tool-body" style="padding-top:0;">
+        <div class="tool-wrapper">
+            <div class="tool-grid">
+                <div class="tool-card animate-in">
+                    <div class="panel-header">
+                        <h3 class="panel-title"><i class="mdi mdi-markdown"></i> Markdown Input</h3>
+                        <div class="toolbar">
+                            <button type="button" class="btn btn-secondary" id="clearBtn"><i class="mdi mdi-eraser"></i> 清空</button>
+                        </div>
+                    </div>
+                    <div class="editor-shell">
+                        <textarea id="markdownInput" class="editor-textarea" spellcheck="false" placeholder="輸入 Markdown 列表..."></textarea>
+                        <p class="hint">提示：使用 <code>- key:type</code> 或 <code>- key:default,type</code>；用 <code>[</code> 和 <code>]</code> 包住陣列模板。</p>
+                    </div>
+                </div>
+
+                <div class="tool-card animate-in">
+                    <div class="panel-header">
+                        <h3 class="panel-title"><i class="mdi mdi-code-json"></i> JSON Schema Output</h3>
+                        <div class="toolbar">
+                            <button type="button" class="btn btn-primary" id="copyBtn"><i class="mdi mdi-content-copy"></i> 複製</button>
+                        </div>
+                    </div>
+                    <div class="editor-shell">
+                        <pre id="jsonOutput" class="editor-textarea json-output" aria-live="polite"></pre>
+                        <p class="hint">輸出可直接貼到 Postman、OpenAPI 範例或測試資料。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <span id="currentYear"></span> © ZEDOTECH |
+                Contact: <a class="footer-link" href="mailto:nicky@zedotech.com">nicky@zedotech.com</a> |
+                <a class="footer-link" href="../webuse.html">使用條款</a> |
+                <a class="footer-link" href="../privacy.html">隱私權政策</a>
+            </p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="mdi mdi-chevron-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const markdownInput = document.getElementById('markdownInput');
+            const jsonOutput = document.getElementById('jsonOutput');
+            const copyBtn = document.getElementById('copyBtn');
+            const clearBtn = document.getElementById('clearBtn');
+
+            function parseMarkdownToJson(markdown) {
+                if (!markdown.trim()) {
+                    return '{}';
+                }
+
+                const lines = markdown.split('\n').map(l => l.trim()).filter(l => l);
+                const root = {};
+                const stack = [{ obj: root, isArrayTemplate: false }];
+                let lastKey = null;
+
+                try {
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i];
+
+                        if (line === '[') {
+                            if (!lastKey) {
+                                throw new Error(`Line ${i + 1}: Array start '[' found without a preceding key.`);
+                            }
+
+                            const template = {};
+                            stack.push({ obj: template, isArrayTemplate: true, parentKey: lastKey });
+                            lastKey = null;
+                        }
+                        else if (line === ']') {
+                            if (stack.length <= 1) {
+                                throw new Error(`Line ${i + 1}: Unexpected ']'.`);
+                            }
+
+                            const context = stack.pop();
+                            if (!context.isArrayTemplate) {
+                                throw new Error(`Line ${i + 1}: Mismatched ']'.`);
+                            }
+
+                            const template = context.obj;
+                            const parentContext = stack[stack.length - 1];
+                            const parentObj = parentContext.obj;
+                            const key = context.parentKey;
+
+                            parentObj[key] = [template];
+                            lastKey = null;
+                        }
+                        else if (line.startsWith('-')) {
+                            const content = line.substring(1).trim();
+                            const parts = content.split(',');
+                            const keyPart = parts[0].trim();
+                            const type = parts.length > 1 ? parts[1].trim().toLowerCase() : 'string';
+
+                            let key = keyPart;
+                            let defaultValue = null;
+
+                            const colonIndex = keyPart.indexOf(':');
+                            if (colonIndex !== -1) {
+                                key = keyPart.substring(0, colonIndex).trim();
+                                defaultValue = keyPart.substring(colonIndex + 1).trim();
+                            }
+
+                            let value;
+
+                            if (defaultValue !== null) {
+                                switch (type) {
+                                    case 'number':
+                                    case 'int':
+                                    case 'integer':
+                                    case 'float':
+                                    case 'double':
+                                        value = Number(defaultValue);
+                                        if (isNaN(value)) value = 0;
+                                        break;
+                                    case 'bool':
+                                    case 'boolean':
+                                        value = (defaultValue.toLowerCase() === 'true');
+                                        break;
+                                    case 'object':
+                                        value = {};
+                                        break;
+                                    default:
+                                        value = defaultValue;
+                                }
+                            } else {
+                                switch (type) {
+                                    case 'number':
+                                    case 'int':
+                                    case 'integer':
+                                    case 'float':
+                                    case 'double':
+                                        value = 0;
+                                        break;
+                                    case 'bool':
+                                    case 'boolean':
+                                        value = true;
+                                        break;
+                                    case 'date':
+                                    case 'datetime':
+                                        value = new Date().toISOString();
+                                        break;
+                                    case 'object':
+                                        value = {};
+                                        break;
+                                    default:
+                                        value = "string";
+                                }
+                            }
+
+                            const currentObj = stack[stack.length - 1].obj;
+                            currentObj[key] = value;
+                            lastKey = key;
+                        }
+                        else {
+                            if (line.startsWith('//') || line.startsWith('#')) {
+                                continue;
+                            }
+                            throw new Error(`Line ${i + 1}: Invalid syntax. Lines must start with '-', '[', or ']'. Found: "${line}"`);
+                        }
+                    }
+
+                    if (stack.length > 1) {
+                        throw new Error("Unexpected end of input. Missing ']'.");
+                    }
+
+                    return JSON.stringify(root, null, 2);
+
+                } catch (error) {
+                    console.error('Parse error:', error);
+                    return 'Error: ' + error.message;
+                }
+            }
+
+            function updateJsonOutput() {
+                const markdown = markdownInput.value;
+                const jsonSchema = parseMarkdownToJson(markdown);
+
+                if (jsonSchema.startsWith('Error:')) {
+                    jsonOutput.classList.add('text-danger');
+                    jsonOutput.textContent = jsonSchema;
+                } else {
+                    jsonOutput.classList.remove('text-danger');
+                    jsonOutput.textContent = jsonSchema;
+                }
+            }
+
+            markdownInput.addEventListener('input', updateJsonOutput);
+
+            markdownInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const start = this.selectionStart;
+                    const end = this.selectionEnd;
+                    const spaces = "  ";
+                    this.value = this.value.substring(0, start) + spaces + this.value.substring(end);
+                    this.selectionStart = this.selectionEnd = start + spaces.length;
+                    updateJsonOutput();
+                }
+            });
+
+            copyBtn.addEventListener('click', function () {
+                const text = jsonOutput.textContent;
+                navigator.clipboard.writeText(text).then(function () {
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = '已複製';
+                    setTimeout(function () {
+                        copyBtn.textContent = originalText;
+                    }, 2000);
+                }).catch(function (err) {
+                    alert('Failed to copy: ' + err);
+                });
+            });
+
+            clearBtn.addEventListener('click', function () {
+                markdownInput.value = '';
+                updateJsonOutput();
+            });
+
+            markdownInput.value = `- producer:Nicky Liu
+- id:1,number
+- timestamp:1763568000,number
+- properties_array 
+[
+    - name
+    - student_number:250001,number
+    - isActive:true,bool
+]`;
+
+            updateJsonOutput();
+        });
+    </script>
+
+    <script src="../js/modern.js"></script>
+</body>
+
+</html>
