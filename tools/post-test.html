@@ -320,6 +320,59 @@
         .d-none{
             display: none;
         }
+        
+        .curl-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+        
+        .curl-title {
+            color: #4ec9b0;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .curl-command {
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.6;
+            background: #2d2d2d;
+            padding: 12px;
+            border-radius: 3px;
+            border: 1px solid #404040;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #005a9e;
+        }
+        
+        .copy-btn.copied {
+            background: #28a745;
+        }
     </style>
 </head>
 <body>
@@ -436,6 +489,15 @@
                     <strong>回應內容:</strong>
                 </div>
                 <div id="responseBody" class="response-body"></div>
+                
+                <!-- CURL 命令區域 (僅在 CORS 錯誤時顯示) -->
+                <div id="curlContainer" class="curl-container hidden">
+                    <div class="curl-title">
+                        💡 cURL 命令 (可在 CMD 中執行以繞過 CORS)
+                    </div>
+                    <button class="copy-btn" onclick="copyCurlCommand()">📋 複製</button>
+                    <div id="curlCommand" class="curl-command"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -577,6 +639,84 @@
         // 清除回應
         function clearResponse() {
             document.getElementById('response').classList.add('hidden');
+            document.getElementById('curlContainer').classList.add('hidden');
+        }
+        
+        // 生成 cURL 命令
+        function generateCurlCommand(url, method, headers, body) {
+            let curlCmd = `curl -X ${method}`;
+            
+            // 添加 headers
+            for (const [key, value] of Object.entries(headers)) {
+                if (key && value) {
+                    // 對於 Windows CMD，使用雙引號
+                    curlCmd += ` ^\n  -H "${key}: ${value.replace(/"/g, '\\"')}"`;
+                }
+            }
+            
+            // 添加 body (僅對 POST, PUT, PATCH)
+            if (body && ['POST', 'PUT', 'PATCH'].includes(method)) {
+                // 轉義 JSON 中的引號以適應 CMD
+                const escapedBody = body.replace(/\r\n/g, '').replace(/\n/g, '').replace(/"/g, '\\"');
+                curlCmd += ` ^\n  -d "${escapedBody}"`;
+            }
+            
+            // 添加 URL
+            curlCmd += ` ^\n  "${url}"`;
+            
+            return curlCmd;
+        }
+        
+        // 複製 cURL 命令
+        function copyCurlCommand() {
+            const curlText = document.getElementById('curlCommand').textContent;
+            
+            // 使用現代的 Clipboard API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(curlText).then(() => {
+                    const btn = document.querySelector('.copy-btn');
+                    const originalText = btn.textContent;
+                    btn.textContent = '✓ 已複製！';
+                    btn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('複製失敗:', err);
+                    fallbackCopy(curlText);
+                });
+            } else {
+                fallbackCopy(curlText);
+            }
+        }
+        
+        // 降級複製方法 (適用於舊瀏覽器)
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ 已複製！';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                alert('複製失敗，請手動複製');
+            }
+            
+            document.body.removeChild(textArea);
         }
 
         // 清除所有儲存的資料
@@ -675,12 +815,17 @@
                 let errorDetail = '請求失敗: ' + error.message + '\n\n';
                 
                 // 判斷是否為 CORS 錯誤
-                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                const isCorsError = error.message.includes('Failed to fetch') || 
+                                   error.message.includes('NetworkError') || 
+                                   error.message.includes('CORS');
+                
+                if (isCorsError) {
                     errorDetail += '❌ 這很可能是 CORS 跨域問題!\n\n';
                     errorDetail += '解決方案:\n';
                     errorDetail += '1. 在伺服器端加入 CORS 設定 (參考上方藍色提示框)\n';
-                    errorDetail += '2. 使用 http-server 或 Live Server 開啟此 HTML\n';
-                    errorDetail += '3. 確認伺服器 URL 是否正確\n\n';
+                    errorDetail += '2. 使用下方的 cURL 命令在 CMD 中執行 (可繞過 CORS)\n';
+                    errorDetail += '3. 使用 http-server 或 Live Server 開啟此 HTML\n';
+                    errorDetail += '4. 確認伺服器 URL 是否正確\n\n';
                     errorDetail += '如果你正在開發 ASP.NET Core API,請在 Program.cs 加入:\n';
                     errorDetail += 'builder.Services.AddCors(options => {\n';
                     errorDetail += '    options.AddPolicy("AllowAll", policy => {\n';
@@ -692,12 +837,20 @@
                     // 高亮 CORS 警告
                     document.getElementById('corsWarning').style.border = '2px solid #ffc107';
                     document.getElementById('corsWarning').style.animation = 'pulse 1s ease-in-out 3';
+                    
+                    // 生成並顯示 cURL 命令
+                    const curlCmd = generateCurlCommand(url, selectedMethod, headers, body);
+                    document.getElementById('curlCommand').textContent = curlCmd;
+                    document.getElementById('curlContainer').classList.remove('hidden');
                 } else {
                     errorDetail += '可能原因:\n';
                     errorDetail += '1. 網路連線問題\n';
                     errorDetail += '2. URL 不正確\n';
                     errorDetail += '3. 伺服器無回應\n';
                     errorDetail += '4. SSL 憑證問題';
+                    
+                    // 隱藏 cURL 區域 (非 CORS 錯誤)
+                    document.getElementById('curlContainer').classList.add('hidden');
                 }
                 
                 document.getElementById('responseBody').textContent = errorDetail;
