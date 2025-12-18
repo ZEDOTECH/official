@@ -85,6 +85,7 @@
 
         input[type="text"],
         input[type="url"],
+        input[type="password"],
         select,
         textarea {
             width: 100%;
@@ -98,6 +99,7 @@
 
         input[type="text"]:focus,
         input[type="url"]:focus,
+        input[type="password"]:focus,
         select:focus,
         textarea:focus {
             outline: none;
@@ -373,6 +375,12 @@
         .copy-btn.copied {
             background: #28a745;
         }
+
+        .auth-specific-fields {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
     </style>
 </head>
 <body>
@@ -426,6 +434,52 @@
                 <div class="section-title">請求 URL</div>
                 <div class="input-group">
                     <input type="url" id="url" placeholder="https://api.example.com/endpoint" value="https://jsonplaceholder.typicode.com/posts">
+                </div>
+            </div>
+
+            <!-- Authentication -->
+            <div class="section">
+                <div class="section-title">驗證 (Authentication)</div>
+                <div class="input-group">
+                    <select id="authType" onchange="updateAuthUI()">
+                        <option value="none">無</option>
+                        <option value="bearer">Bearer Token</option>
+                        <option value="basic">Basic Auth</option>
+                        <option value="apikey">API Key</option>
+                    </select>
+                </div>
+                <div id="auth-fields-container">
+                    <!-- Bearer Token Fields -->
+                    <div id="auth-bearer" class="auth-specific-fields hidden">
+                        <div class="input-group">
+                            <label for="bearerToken">Token</label>
+                            <input type="text" id="bearerToken" placeholder="輸入你的 bearer token">
+                        </div>
+                    </div>
+            
+                    <!-- Basic Auth Fields -->
+                    <div id="auth-basic" class="auth-specific-fields hidden">
+                        <div class="input-group">
+                            <label for="basicUser">使用者名稱</label>
+                            <input type="text" id="basicUser" placeholder="Username">
+                        </div>
+                        <div class="input-group">
+                            <label for="basicPass">密碼</label>
+                            <input type="password" id="basicPass" placeholder="Password">
+                        </div>
+                    </div>
+            
+                    <!-- API Key Fields -->
+                    <div id="auth-apikey" class="auth-specific-fields hidden">
+                        <div class="input-group">
+                            <label for="apiKeyHeader">標頭名稱 (Header Name)</label>
+                            <input type="text" id="apiKeyHeader" placeholder="例如：X-API-Key" value="X-API-Key">
+                        </div>
+                        <div class="input-group">
+                            <label for="apiKeyValue">金鑰值 (Value)</label>
+                            <input type="text" id="apiKeyValue" placeholder="輸入你的 API key">
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -508,7 +562,30 @@
         // 初始化 - 載入儲存的資料
         window.addEventListener('DOMContentLoaded', function() {
             loadSavedData();
+            // Add event listeners for auth fields to save data on change
+            document.getElementById('bearerToken').addEventListener('blur', saveData);
+            document.getElementById('basicUser').addEventListener('blur', saveData);
+            document.getElementById('basicPass').addEventListener('blur', saveData);
+            document.getElementById('apiKeyHeader').addEventListener('blur', saveData);
+            document.getElementById('apiKeyValue').addEventListener('blur', saveData);
         });
+
+        function updateAuthUI() {
+            const authType = document.getElementById('authType').value;
+            
+            document.getElementById('auth-bearer').classList.add('hidden');
+            document.getElementById('auth-basic').classList.add('hidden');
+            document.getElementById('auth-apikey').classList.add('hidden');
+
+            if (authType === 'bearer') {
+                document.getElementById('auth-bearer').classList.remove('hidden');
+            } else if (authType === 'basic') {
+                document.getElementById('auth-basic').classList.remove('hidden');
+            } else if (authType === 'apikey') {
+                document.getElementById('auth-apikey').classList.remove('hidden');
+            }
+            saveData(); // Save selection
+        }
 
         // 載入儲存的資料
         function loadSavedData() {
@@ -559,6 +636,22 @@
                         addHeader();
                     }
                 }
+
+                // 載入 Authentication
+                const savedAuthType = localStorage.getItem('api_test_auth_type');
+                if (savedAuthType) {
+                    document.getElementById('authType').value = savedAuthType;
+                    if (savedAuthType === 'bearer') {
+                        document.getElementById('bearerToken').value = localStorage.getItem('api_test_auth_bearer_token') || '';
+                    } else if (savedAuthType === 'basic') {
+                        document.getElementById('basicUser').value = localStorage.getItem('api_test_auth_basic_user') || '';
+                        document.getElementById('basicPass').value = localStorage.getItem('api_test_auth_basic_pass') || '';
+                    } else if (savedAuthType === 'apikey') {
+                        document.getElementById('apiKeyHeader').value = localStorage.getItem('api_test_auth_apikey_header') || 'X-API-Key';
+                        document.getElementById('apiKeyValue').value = localStorage.getItem('api_test_auth_apikey_value') || '';
+                    }
+                }
+                updateAuthUI(); // This will show the correct fields based on loaded data
             } catch (e) {
                 console.error('載入儲存資料失敗:', e);
             }
@@ -568,12 +661,10 @@
         function saveData() {
             try {
                 // 儲存 URL
-                const url = document.getElementById('url').value;
-                localStorage.setItem('api_test_url', url);
+                localStorage.setItem('api_test_url', document.getElementById('url').value);
 
                 // 儲存 Request Body
-                const body = document.getElementById('requestBody').value;
-                localStorage.setItem('api_test_body', body);
+                localStorage.setItem('api_test_body', document.getElementById('requestBody').value);
 
                 // 儲存 HTTP 方法
                 localStorage.setItem('api_test_method', selectedMethod);
@@ -583,9 +674,26 @@
                 document.querySelectorAll('.header-row').forEach(row => {
                     const key = row.querySelector('.header-key').value.trim();
                     const value = row.querySelector('.header-value').value.trim();
-                    headers.push({ key, value });
+                    if(key){
+                         headers.push({ key, value });
+                    }
                 });
                 localStorage.setItem('api_test_headers', JSON.stringify(headers));
+
+                // 儲存 Authentication
+                const authType = document.getElementById('authType').value;
+                localStorage.setItem('api_test_auth_type', authType);
+
+                if (authType === 'bearer') {
+                    localStorage.setItem('api_test_auth_bearer_token', document.getElementById('bearerToken').value);
+                } else if (authType === 'basic') {
+                    localStorage.setItem('api_test_auth_basic_user', document.getElementById('basicUser').value);
+                    localStorage.setItem('api_test_auth_basic_pass', document.getElementById('basicPass').value);
+                } else if (authType === 'apikey') {
+                    localStorage.setItem('api_test_auth_apikey_header', document.getElementById('apiKeyHeader').value);
+                    localStorage.setItem('api_test_auth_apikey_value', document.getElementById('apiKeyValue').value);
+                }
+
             } catch (e) {
                 console.error('儲存資料失敗:', e);
             }
@@ -726,6 +834,12 @@
                 localStorage.removeItem('api_test_body');
                 localStorage.removeItem('api_test_method');
                 localStorage.removeItem('api_test_headers');
+                localStorage.removeItem('api_test_auth_type');
+                localStorage.removeItem('api_test_auth_bearer_token');
+                localStorage.removeItem('api_test_auth_basic_user');
+                localStorage.removeItem('api_test_auth_basic_pass');
+                localStorage.removeItem('api_test_auth_apikey_header');
+                localStorage.removeItem('api_test_auth_apikey_value');
                 
                 // 重新載入頁面以恢復預設值
                 location.reload();
@@ -754,6 +868,27 @@
                     headers[key] = value;
                 }
             });
+
+            // 添加 authentication headers
+            const authType = document.getElementById('authType').value;
+            if (authType === 'bearer') {
+                const token = document.getElementById('bearerToken').value.trim();
+                if (token) {
+                    headers['Authorization'] = `Bearer ${token}`;
+                }
+            } else if (authType === 'basic') {
+                const user = document.getElementById('basicUser').value;
+                const pass = document.getElementById('basicPass').value;
+                if (user || pass) {
+                    headers['Authorization'] = `Basic ${btoa(`${user}:${pass}`)}`;
+                }
+            } else if (authType === 'apikey') {
+                const headerName = document.getElementById('apiKeyHeader').value.trim();
+                const value = document.getElementById('apiKeyValue').value.trim();
+                if (headerName && value) {
+                    headers[headerName] = value;
+                }
+            }
 
             // 顯示載入中
             document.getElementById('loading').classList.remove('hidden');
@@ -882,7 +1017,8 @@
         setInterval(function() {
             const url = document.getElementById('url').value;
             const body = document.getElementById('requestBody').value;
-            if (url || body) {
+            const authType = document.getElementById('authType').value;
+            if (url || body || authType !== 'none') {
                 saveData();
             }
         }, 5000);
